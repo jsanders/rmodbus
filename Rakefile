@@ -7,10 +7,11 @@ rescue Exception
 end
 
 begin
- require 'spec/rake/spectask'
+  require 'spec/rake/spectask'
 
- Spec::Rake::SpecTask.new do |t|
+  Spec::Rake::SpecTask.new do |t|
     t.spec_opts = ['-c']
+    t.libs << 'lib'
     t.spec_files = FileList['test/**/*_spec.rb']
     t.rcov = true 
   end
