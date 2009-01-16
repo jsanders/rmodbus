@@ -1,6 +1,4 @@
-$:.unshift "#{File.dirname(__FILE__)}/../lib"
-
-require 'lib/rmodbus'
+require 'rmodbus'
 
 describe TCPServer do
   
@@ -20,7 +18,7 @@ describe TCPServer do
     begin
       client.read_coils(1,3)
     rescue ModBus::Errors::ModBusException => ex
-      ex.message.should == "Server not respond"
+      ex.message.should == "Server did not respond"
     end
   end
 
@@ -66,7 +64,7 @@ describe TCPServer do
   end
 
   it "should supported function 'read discrete inputs'" do
-    @client.read_discret_inputs(1,3).should == @server.discret_inputs[1,3]
+    @client.read_discrete_inputs(1,3).should == @server.discret_inputs[1,3]
   end
 
   it "should supported function 'read holding registers'" do

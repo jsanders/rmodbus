@@ -27,9 +27,17 @@ module ModBus
 
     # Connect with a ModBus server
     def initialize(ipaddr, port = 502, slaveaddr = 1)
-      timeout(1) do
-        @sock = TCPSocket.new(ipaddr, port)
+      tried = 0
+      begin
+        timeout(1, ModBusTimeout) do
+          @sock = TCPSocket.new(ipaddr, port)
+        end
+      rescue ModBusTimeout => err
+        tried += 1
+        retry unless tried >= CONNECTION_RETRIES
+        raise ModBusTimeout.new, 'Timed out attempting to create connection'
       end
+
       @slave = slaveaddr
     end
 
@@ -37,7 +45,6 @@ module ModBus
       @sock.close
     end
  
-
     def self.transaction 
       @@transaction
     end
@@ -56,7 +63,7 @@ module ModBus
         len = header[4,2].to_int16       
         @sock.read(len-1)               
       else
-        raise Errors::ModBusException.new("Server not respond")
+        raise Errors::ModBusException.new("Server did not respond")
       end
     end
 

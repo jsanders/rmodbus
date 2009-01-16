@@ -89,6 +89,10 @@ module ModBus
   
     include Errors
 
+    # Number of times to retry on connection and read timeouts
+    CONNECTION_RETRIES = 10
+    READ_RETRIES = 10
+
     # Read value *ncoils* coils starting with *addr*
     #
     # Return array of their values
@@ -99,8 +103,14 @@ module ModBus
     # Read value *ncoils* discrete inputs starting with *addr*
     #
     # Return array of their values
-    def read_discret_inputs(addr, ncoils)
+    def read_discrete_inputs(addr, ncoils)
       query("\x2" + addr.to_bytes + ncoils.to_bytes).to_array_bit[0..ncoils-1]
+    end
+
+    # Deprecated version of read_discrete_inputs
+    def read_discret_inputs(addr, ncoils)
+      warn "[DEPRECATION] `read_discret_inputs` is deprecated.  Please use `read_discrete_inputs` instead."
+      read_discrete_inputs(addr, ncoils)
     end
 
     # Read value *nreg* holding registers starting with *addr*
@@ -188,10 +198,17 @@ module ModBus
     def query(pdu)    
       send_pdu(pdu)
 
-      timeout(1) do
-        pdu = read_pdu
+      tried = 0
+      begin
+        timeout(1, ModBusTimeout) do
+          pdu = read_pdu
+        end
+      rescue ModBusTimeout => err
+        tried += 1
+        retry unless tried >= READ_RETRIES
+        raise ModBusTimeout.new, 'Timed out during read attempt'
       end
-    
+
       if pdu[0].to_i >= 0x80
         case pdu[1].to_i
           when 1
@@ -205,11 +222,11 @@ module ModBus
           when 5
             raise Acknowledge.new, "The server has accepted the request and is processing it, but a long duration of time will be required to do so"
           when 6
-            raise SlaveDiviceBus.new, "The server is engaged in processing a long duration program command"
+            raise SlaveDeviceBus.new, "The server is engaged in processing a long duration program command"
           when 8
             raise MemoryParityError.new, "The extended file area failed to pass a consistency check"
           else
-            raise ModBusException.new, "Unknow error"
+            raise ModBusException.new, "Unknown error"
         end
       end
       pdu[2..-1]
