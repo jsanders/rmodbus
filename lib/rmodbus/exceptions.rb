@@ -18,6 +18,9 @@ module ModBus
     class ModBusException < Exception
     end
 
+    class ModBusTimeout < ModBusException
+    end
+
     class IllegalFunction < ModBusException
     end
 
@@ -33,7 +36,7 @@ module ModBus
     class Acknowledge < ModBusException
     end
 
-    class SlaveDiviceBus < ModBusException
+    class SlaveDeviceBus < ModBusException
     end
 
     class MemoryParityError < ModBusException
