@@ -49,7 +49,6 @@ begin
     s.email = 'sanderjd@gmail.com'
     s.homepage = 'http://rubyforge.org/var/svn/rmodbus/trunk'
     s.authors = ['Aleksey Timin', 'D.Samatov', 'James Sanders']
-    s.extensions = ["ext/extconf.rb"]
     s.has_rdoc = true
   end
 rescue LoadError
