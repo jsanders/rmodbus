@@ -12,7 +12,7 @@ begin
   Spec::Rake::SpecTask.new do |t|
     t.spec_opts = ['-c']
     t.libs << 'lib'
-    t.spec_files = FileList['test/**/*_spec.rb']
+    t.spec_files = FileList['spec/**/*_spec.rb']
     t.rcov = true 
   end
 rescue Exception 
