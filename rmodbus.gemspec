@@ -9,8 +9,7 @@ Gem::Specification.new do |s|
   s.date = %q{2009-01-16}
   s.description = %q{A free Ruby implementation of the ModBus protocol}
   s.email = %q{sanderjd@gmail.com}
-  s.extensions = ["ext/extconf.rb"]
-  s.files = ["ext/extconf.rb"]
+  s.files = ["VERSION.yml", "AUTHORS", "CHANGES", "LICENSE", "README", "Rakefile", "lib/rmodbus", "lib/rmodbus/client.rb", "lib/rmodbus/exceptions.rb", "lib/rmodbus/rtu_client.rb", "lib/rmodbus/tcp_client.rb", "lib/rmodbus/tcp_server.rb", "lib/rmodbus.rb", "test/client_spec.rb", "test/ext_spec.rb", "test/rtu_client_spec.rb", "test/tcp_client_spec.rb", "test/tcp_server_spec.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://rubyforge.org/var/svn/rmodbus/trunk}
   s.require_paths = ["lib"]

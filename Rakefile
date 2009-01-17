@@ -49,6 +49,24 @@ begin
     s.email = 'sanderjd@gmail.com'
     s.homepage = 'http://rubyforge.org/var/svn/rmodbus/trunk'
     s.authors = ['Aleksey Timin', 'D.Samatov', 'James Sanders']
+    s.files = ["VERSION.yml", 
+               "AUTHORS",
+               "CHANGES",
+               "LICENSE",
+               "README",
+               "Rakefile",
+               "lib/rmodbus", 
+               "lib/rmodbus/client.rb", 
+               "lib/rmodbus/exceptions.rb", 
+               "lib/rmodbus/rtu_client.rb", 
+               "lib/rmodbus/tcp_client.rb", 
+               "lib/rmodbus/tcp_server.rb", 
+               "lib/rmodbus.rb", 
+               "test/client_spec.rb", 
+               "test/ext_spec.rb", 
+               "test/rtu_client_spec.rb", 
+               "test/tcp_client_spec.rb", 
+               "test/tcp_server_spec.rb"]
     s.has_rdoc = true
   end
 rescue LoadError
