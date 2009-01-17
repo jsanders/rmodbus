@@ -149,7 +149,9 @@ module ModBus
       param = parse_read_func(req, @holding_registers)
 
       if param[:err] == 0
-        param = {:err => 0, :addr => param[:addr], :quant => param[:quant], :val => req[6,param[:quant]].to_array_int16 }
+        # Each val is 2 bytes, so multiply by two to get number of bytes
+        bytes_for_vals = param[:quant] * 2
+        param = {:err => 0, :addr => param[:addr], :quant => param[:quant], :val => req[6,bytes_for_vals].to_array_int16 }
       end
       param
     end
