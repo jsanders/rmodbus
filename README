@@ -27,18 +27,14 @@ from its distribution directory
 
 Download and install RModBus with the following
 
-$ gem install --remote rmodbus
+$ gem sources -a http://gems.github.com
+$ gem install -r sanderjd-rmodbus
 
 == CSM
 
-You can checkout source code from SVN  repositry 
+You can checkout source code from the GIT repositry 
 
-
-$ svn checkout svn://rubyforge.org/var/svn/rmodbu/trunk
-
-or
-
-$ svn checkout http://rubyforge.org/var/svn/rmodbus/trunk
+$ git clone git://github.com/sanderjd/rmodbus.git 
 
 == Reference 
 

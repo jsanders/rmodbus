@@ -1,2 +1,9 @@
+2009-16-01 Release-0.1.3
+- fix bug in tests relating to closing sockets
+2009-16-01 Release-0.1.2
+- fork into git
+- fixed bug in function parse_write_multiple_registers in tcp_server
+- deprecated read_discret_inputs method due to misspelling - is now
+  read_discrete_inputs
 2008-25-01 Release-0.1.1
 - fixed bug in function "read discrete inputs (0x2)" of ModBus client
