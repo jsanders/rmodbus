@@ -38,11 +38,11 @@ begin
                "lib/rmodbus/tcp_client.rb", 
                "lib/rmodbus/tcp_server.rb", 
                "lib/rmodbus.rb", 
-               "test/client_spec.rb", 
-               "test/ext_spec.rb", 
-               "test/rtu_client_spec.rb", 
-               "test/tcp_client_spec.rb", 
-               "test/tcp_server_spec.rb"]
+               "spec/client_spec.rb", 
+               "spec/ext_spec.rb", 
+               "spec/rtu_client_spec.rb", 
+               "spec/tcp_client_spec.rb", 
+               "spec/tcp_server_spec.rb"]
   end
 rescue LoadError
   puts 'Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com'
