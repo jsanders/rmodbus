@@ -1,6 +1,3 @@
-require 'rbconfig'
-require 'ftools'
-
 begin
   require 'rubygems'
 rescue Exception
@@ -16,28 +13,7 @@ begin
     t.rcov = true 
   end
 rescue Exception 
-  puts 'RSpec not found, please install rspec for run testes'
-end
-
-include Config
-
-task :install do
-
-  sitedir = CONFIG['sitelibdir']
-  rmodbus_dest = File.join(sitedir, 'rmodbus')
-
-  File::makedirs(rmodbus_dest, true)
-  File::chmod(0755, rmodbus_dest)
-
-  files = Dir.chdir('lib') { Dir['**/*.rb'] }
-
-  files.each do |fn|
-    fn_dir = File.dirname(fn)
-    target_dir = File.join(sitedir, fn_dir)
-    File::makedirs(target_dir) unless File.exist?(target_dir)
-    File::install(File.join('lib', fn), File.join(sitedir, fn), 0644, true)
-  end
-
+  puts 'RSpec not available. Install it with: sudo gem install rspec'
 end
 
 begin
@@ -49,6 +25,7 @@ begin
     s.email = 'sanderjd@gmail.com'
     s.homepage = 'http://rubyforge.org/var/svn/rmodbus/trunk'
     s.authors = ['Aleksey Timin', 'D.Samatov', 'James Sanders']
+    s.has_rdoc = true
     s.files = ["VERSION.yml", 
                "AUTHORS",
                "CHANGES",
@@ -58,7 +35,6 @@ begin
                "lib/rmodbus", 
                "lib/rmodbus/client.rb", 
                "lib/rmodbus/exceptions.rb", 
-               "lib/rmodbus/rtu_client.rb", 
                "lib/rmodbus/tcp_client.rb", 
                "lib/rmodbus/tcp_server.rb", 
                "lib/rmodbus.rb", 
@@ -67,8 +43,7 @@ begin
                "test/rtu_client_spec.rb", 
                "test/tcp_client_spec.rb", 
                "test/tcp_server_spec.rb"]
-    s.has_rdoc = true
   end
 rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+  puts 'Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com'
 end
