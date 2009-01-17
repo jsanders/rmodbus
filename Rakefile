@@ -39,3 +39,19 @@ task :install do
   end
 
 end
+
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |s|
+    s.name = "rmodbus"
+    s.summary = "RModBus - free implementation of protocol ModBus"
+    s.description = "A free Ruby implementation of the ModBus protocol"
+    s.email = 'sanderjd@gmail.com'
+    s.homepage = 'http://rubyforge.org/var/svn/rmodbus/trunk'
+    s.authors = ['Aleksey Timin', 'D.Samatov', 'James Sanders']
+    s.extensions = ["ext/extconf.rb"]
+    s.has_rdoc = true
+  end
+rescue LoadError
+  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+end
