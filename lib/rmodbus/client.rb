@@ -239,6 +239,9 @@ module ModBus
     def read_pdu
     end
 
+    def close
+    end
+
   end
 
 end

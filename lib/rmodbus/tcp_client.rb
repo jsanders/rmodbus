@@ -42,7 +42,7 @@ module ModBus
     end
 
     def close
-      @sock.close
+      @sock.close unless @sock.closed?
     end
  
     def self.transaction 
